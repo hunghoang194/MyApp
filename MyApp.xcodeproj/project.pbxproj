@@ -33,7 +33,6 @@
 		84511C242451781D00A63A56 /* MyALoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84511C0B2451781C00A63A56 /* MyALoginViewController.swift */; };
 		84511C252451781D00A63A56 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84511C0C2451781D00A63A56 /* SecondViewController.swift */; };
 		84511C262451781D00A63A56 /* MyARegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84511C0D2451781D00A63A56 /* MyARegisterViewController.swift */; };
-		84511C272451781D00A63A56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84511C0E2451781D00A63A56 /* AppDelegate.swift */; };
 		84511C282451781D00A63A56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84511C112451781D00A63A56 /* Main.storyboard */; };
 		84511C292451781D00A63A56 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84511C132451781D00A63A56 /* Login.storyboard */; };
 		84511C2A2451781D00A63A56 /* SecondTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84511C162451781D00A63A56 /* SecondTableViewCell.xib */; };
@@ -41,6 +40,7 @@
 		84511C2C2451781D00A63A56 /* FirtCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84511C192451781D00A63A56 /* FirtCollectionViewCell.xib */; };
 		84511C2D2451781D00A63A56 /* FirtCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84511C1A2451781D00A63A56 /* FirtCollectionViewCell.swift */; };
 		84511C302451788200A63A56 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84511C2F2451788200A63A56 /* BaseViewController.swift */; };
+		84C91D8A2457C9120092C883 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C91D892457C9120092C883 /* AppDelegate.swift */; };
 		CAEED8BF2F97D99793F1F9D5 /* Pods_MyAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574D6D57D4D22A267B78CC9D /* Pods_MyAppTests.framework */; };
 		F7E719CB01F2A6BD7BBFAF28 /* Pods_MyApp_MyAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8D576A56F5D87D604B43B22 /* Pods_MyApp_MyAppUITests.framework */; };
 /* End PBXBuildFile section */
@@ -95,7 +95,6 @@
 		84511C0B2451781C00A63A56 /* MyALoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyALoginViewController.swift; sourceTree = "<group>"; };
 		84511C0C2451781D00A63A56 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		84511C0D2451781D00A63A56 /* MyARegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyARegisterViewController.swift; sourceTree = "<group>"; };
-		84511C0E2451781D00A63A56 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../../../Downloads/NewProject/NewProject/AppDelegate.swift; sourceTree = "<group>"; };
 		84511C122451781D00A63A56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84511C132451781D00A63A56 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		84511C162451781D00A63A56 /* SecondTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondTableViewCell.xib; sourceTree = "<group>"; };
@@ -103,6 +102,7 @@
 		84511C192451781D00A63A56 /* FirtCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirtCollectionViewCell.xib; sourceTree = "<group>"; };
 		84511C1A2451781D00A63A56 /* FirtCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirtCollectionViewCell.swift; sourceTree = "<group>"; };
 		84511C2F2451788200A63A56 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		84C91D892457C9120092C883 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9748E7CC58BA5B0076DF8A86 /* Pods-MyAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyAppTests.release.xcconfig"; path = "Target Support Files/Pods-MyAppTests/Pods-MyAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		C8D576A56F5D87D604B43B22 /* Pods_MyApp_MyAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyApp_MyAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFB52BBA1291098481FC241A /* Pods-MyApp-MyAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyApp-MyAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyApp-MyAppUITests/Pods-MyApp-MyAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 		84511BCF245177C000A63A56 /* MyApp */ = {
 			isa = PBXGroup;
 			children = (
-				84511C0E2451781D00A63A56 /* AppDelegate.swift */,
+				84C91D892457C9120092C883 /* AppDelegate.swift */,
 				84511C012451781C00A63A56 /* Base */,
 				84511C082451781C00A63A56 /* Controller */,
 				84511BFE2451781C00A63A56 /* Helper */,
@@ -616,12 +616,12 @@
 				84511C2B2451781D00A63A56 /* SecondTableViewCell.swift in Sources */,
 				84511C302451788200A63A56 /* BaseViewController.swift in Sources */,
 				840F236A2456E96300C0CB5D /* UsersModel.xcdatamodeld in Sources */,
+				84C91D8A2457C9120092C883 /* AppDelegate.swift in Sources */,
 				84511C1D2451781D00A63A56 /* Preferences.swift in Sources */,
 				84511C2D2451781D00A63A56 /* FirtCollectionViewCell.swift in Sources */,
 				8419E6C72452A3AB0083A471 /* MyABaseService.swift in Sources */,
 				84511C1C2451781D00A63A56 /* UtilityFunction.swift in Sources */,
 				84511C232451781D00A63A56 /* MyAForgotPasswordViewController.swift in Sources */,
-				84511C272451781D00A63A56 /* AppDelegate.swift in Sources */,
 				840F235C245673AF00C0CB5D /* CustomSlideViewController.swift in Sources */,
 				84511C1E2451781D00A63A56 /* BaseCollectionViewController.swift in Sources */,
 				84511C222451781D00A63A56 /* ViewController.swift in Sources */,
