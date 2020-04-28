@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 import CoreData
 
 class MyARegisterViewController: BaseViewController {
@@ -27,6 +26,7 @@ class MyARegisterViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getInfoUsers()
         setupViewRegister()
         hideKeyboardWhenTappedAround()
         
@@ -37,19 +37,6 @@ class MyARegisterViewController: BaseViewController {
     @IBAction func actionRegister(_ sender: Any) {
         checkValidUserName()
         
-    }
-    func createUser(){
-        let email: String = (self.emailTextF.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))!
-        let userName: String = (self.userNameTextF.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))!
-        let password: String = (self.passwordTextF.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))!
-        Auth.auth().createUser(withEmail: userName, password: password) { authResult, error in
-            if(error != nil) {
-                self.showError(string: "error")
-                print(error)
-                return
-            }
-            self.showError(string: "user create")
-        }
     }
     func checkValidUserName() {
         let email: String = (self.emailTextF.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))!
@@ -85,53 +72,56 @@ class MyARegisterViewController: BaseViewController {
             showError(string: "do dai pass k du")
             return
         }
-        //check thanh cong het thi vao day
-
-
+        if let check = UtilityFunction.entityExists(userName: userName) , check == true{
+            //check thanh cong het thi vao day
+            save(name: userName, password: password)
+            nextLoginVC()
+            showError(string: "đăng ký thành công")
+        }else{
+            showError(string: "đã co loi")
+        }
         
-//        Auth.auth().createUser(withEmail: userName, password: password) { authResult, error in
-//            if(error != nil) {
-//                self.showError(string: "error")
-//                print(error)
-//                return
-//            }
-//            self.showError(string: "user create")
-//        }
-
-        nextLoginVC()
-        showError(string: "đăng ký thành công")
     }
+
+   
     func save(name: String, password: String) {
-      
       guard let appDelegate =
         UIApplication.shared.delegate as? AppDelegate else {
         return
       }
-      
-      // 1
       let managedContext =
         appDelegate.persistentContainer.viewContext
-      
-      // 2
       let entity =
-        NSEntityDescription.entity(forEntityName: "Person",
+        NSEntityDescription.entity(forEntityName: "UsersEntity",
                                    in: managedContext)!
-      
-      let person = NSManagedObject(entity: entity,
+      let users = NSManagedObject(entity: entity,
                                    insertInto: managedContext)
-      
-      // 3
-      person.setValue(name, forKeyPath: "name")
-      person.setValue(password, forKeyPath: "password")
-      
-      // 4
+      users.setValue(name, forKeyPath: "userName")
+      users.setValue(password, forKeyPath: "password")
       do {
         try managedContext.save()
-        account.append(person)
+        account.append(users)
       } catch let error as NSError {
         print("Could not save. \(error), \(error.userInfo)")
       }
     }
+    func getInfoUsers() {
+          guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+              return
+          }
+          
+          let managedContext =
+            appDelegate.persistentContainer.viewContext
+          let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "UsersEntity")
+          do {
+            account = try managedContext.fetch(fetchRequest)
+            print(account)
+          } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+          }
+        }
     func setupViewRegister() {
         emailView.layer.cornerRadius = 25
         emailView.layer.masksToBounds = true
@@ -148,11 +138,13 @@ class MyARegisterViewController: BaseViewController {
         passwordView.layer.borderWidth = 1.0
         passwordView.layer.borderColor = UIColor.white.cgColor
         passwordTextF.attributedPlaceholder = NSAttributedString(string: "password",attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        passwordTextF.isSecureTextEntry = true
         confirmPasswordView.layer.cornerRadius = 25
         confirmPasswordView.layer.masksToBounds = true
         confirmPasswordView.layer.borderWidth = 1.0
         confirmPasswordView.layer.borderColor = UIColor.white.cgColor
         confirmPasswordTextF.attributedPlaceholder = NSAttributedString(string: "confirm password",attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        confirmPasswordTextF.isSecureTextEntry = true
         btnRegister.layer.cornerRadius = 25
         btnRegister.layer.masksToBounds = true
         btnRegister.layer.borderWidth = 1.0

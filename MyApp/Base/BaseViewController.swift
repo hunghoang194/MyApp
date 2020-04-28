@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 import FacebookLogin
 
 class BaseViewController: UIViewController {
@@ -41,14 +40,6 @@ class BaseViewController: UIViewController {
     func openSecondVC(){
         let nextScreen = self.storyboard?.instantiateViewController(withIdentifier: "BaseTableViewController") as! BaseTableViewController
         self.navigationController?.pushViewController(nextScreen, animated: true)
-    }
-    @objc public func logOutDefault() -> Bool{
-        do{
-            try Auth.auth().signOut()
-            return true
-        }catch{
-            return false
-        }
     }
     @objc public func logOutFB() {
         let loginManager = LoginManager()

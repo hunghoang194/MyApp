@@ -22,7 +22,7 @@ class ViewController: BaseViewController {
     }
     @IBAction func nextScreen(_ sender: Any) {
 //        openFirtVC()
-        showLeftViewController()
+        showLeftViewController() 
     }
     @IBAction func actionLogOut(_ sender: Any) {
 //        logOutDefault()

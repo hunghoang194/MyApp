@@ -8,14 +8,12 @@
 
 import UIKit
 import CoreData
-import Firebase
 import FacebookCore
 import FacebookLogin
-import FirebaseAuth
 import GoogleSignIn
 
-class MyALoginViewController: BaseViewController, GIDSignInDelegate {
-    
+class MyALoginViewController: BaseViewController {
+
     @IBOutlet weak var userNameView: UIView!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordView: UIView!
@@ -26,14 +24,17 @@ class MyALoginViewController: BaseViewController, GIDSignInDelegate {
     @IBOutlet weak var btnGoogle: GIDSignInButton!
     @IBOutlet weak var btnLogin: UIButton!
     @IBOutlet weak var btnForGotPassword: UIButton!
+    
     var isLogin: Bool = false
+    var googleSignIn = GIDSignIn.sharedInstance()
+    var googleFirstName = ""
+    var googleLastName = ""
+    var googleEmail = ""
+    var googleProfileURL = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        GIDSignIn.sharedInstance()?.presentingViewController = self
-        GIDSignIn.sharedInstance().signIn()
         setupViewLogin()
         hideKeyboardWhenTappedAround()
-        Defaults.save("a@gmail.com", password: "123456")
     }
     // MARK: Action
     @IBAction func actionLoginDefault(_ sender: Any) {
@@ -50,7 +51,7 @@ class MyALoginViewController: BaseViewController, GIDSignInDelegate {
         
     }
     @IBAction func actionLoginGoogle(_ sender: Any) {
-        GIDSignIn.sharedInstance().signIn()
+        googleAuthLogin()
     }
     @IBAction func actionForGotPassword(_ sender: Any) {
         nextForgotPass()
@@ -58,28 +59,11 @@ class MyALoginViewController: BaseViewController, GIDSignInDelegate {
     @IBAction func actionRegister(_ sender: Any) {
         nextRegisterVC()
     }
-    
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let error = error {
-            print(error.localizedDescription)
-            return
-        }
-        guard let auth = user.authentication else { return }
-        let credentials = GoogleAuthProvider.credential(withIDToken: auth.idToken, accessToken: auth.accessToken)
-        Auth.auth().signIn(with: credentials) { (authResult, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("Login Successful")
-                //This is where you should add the functionality of successful login
-                //i.e. dismissing this view or push the home view controller etc
-            }
-        }
-        
-    }
-    func checkLogin(){
-        if let accessToken = AccessToken.current {
-        }
+    func googleAuthLogin() {
+        self.googleSignIn?.presentingViewController = self
+        self.googleSignIn?.clientID = "641107958063-eg0k406tab2c654qimpaltqf1uevrg56.apps.googleusercontent.com"
+        self.googleSignIn?.delegate = self
+        self.googleSignIn?.signIn()
     }
     func getFBUserData() {
         let graphRequest = GraphRequest(graphPath: "me", parameters: ["fields":"id, email, name,birthday,gender, picture.width(480).height(480)"])
@@ -129,13 +113,7 @@ class MyALoginViewController: BaseViewController, GIDSignInDelegate {
                 phoneNumber = userName.replacingOccurrences(of: "84", with: "0", options: .literal, range: nil)
             }
         }
-        //chua nhap userName
-        if userName == "" {
-            showError()
-            return
-        }
-        //chua nhap password
-        if password == "" {
+        if (userName.isEmpty || password.isEmpty ) {
             showError()
             return
         }
@@ -150,43 +128,10 @@ class MyALoginViewController: BaseViewController, GIDSignInDelegate {
             return
         }
         //check thanh cong het thi vao day
+        if let check = 
         self.nextHomeVC()
         self.showError(string: "Login sucesss for account \(userName)")
-//        Auth.auth().signIn(withEmail: userName, password: password) { [weak self] user, error in
-//            guard let strongSelf = self else { return }
-//            if(error != nil) {
-//                strongSelf.showError(string: "password hoặc email không đúng xin vui lòng nhập lại")
-//                print(error)
-//                return
-//            }
         }
-    struct Defaults {
-        static let (userName, password) = ("userName", "password")
-        static let userSessionKey = "com.save.usersession"
-        private static let userDefault = UserDefaults.standard
-        struct UserDetails {
-            let name: String
-            let pass: String
-            
-            init(_ json: [String: String]) {
-                self.name = json[userName] ?? ""
-                self.pass = json[password] ?? ""
-            }
-        }
-        //Lưu chi tiết người dùng
-        static func save(_ userName: String, password: String){
-            userDefault.set([userName: userName, password: password],
-                            forKey: userSessionKey)
-        }
-        //Tìm nạp các giá trị thông qua Model  UserDetails
-        static func getNameAndAddress()-> UserDetails {
-            return UserDetails((userDefault.value(forKey: userSessionKey) as? [String: String]) ?? [:])
-        }
-        //Xoá chi tiết người dùng trong UserDefault qua key "com.save.usersession"
-        static func clearUserData(){
-            userDefault.removeObject(forKey: userSessionKey)
-        }
-    }
     // MARK: setupViewLogin
     func setupViewLogin() {
         let whiteCustomer = UIColor(red: 255, green: 255, blue: 254, alpha: 0)
@@ -200,6 +145,7 @@ class MyALoginViewController: BaseViewController, GIDSignInDelegate {
         passwordView.layer.borderWidth = 1.0
         passwordView.layer.borderColor = UIColor.white.cgColor
         passwordTextField.attributedPlaceholder = NSAttributedString(string: "password",attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        passwordTextField.isSecureTextEntry = true
         facebookView.layer.cornerRadius = 20
         facebookView.layer.masksToBounds = true
         facebookView.layer.borderWidth = 1.0
@@ -231,5 +177,33 @@ extension String {
         } catch {
             return false
         }
+    }
+}
+extension MyALoginViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        guard let user = user else {
+            print("Uh oh. The user cancelled the Google login.")
+            return
+        }
+        let userFirstName = user.profile.givenName ?? ""
+        print("Google User First Name: \(userFirstName)")
+        self.googleFirstName = userFirstName
+        
+        let userLastName = user.profile.familyName ?? ""
+        print("Google User Last Name: \(userLastName)")
+        self.googleLastName = userLastName
+        
+        let userEmail = user.profile.email ?? ""
+        print("Google User Email: \(userEmail)")
+        self.googleEmail = userEmail
+        
+        let googleProfilePicURL = user.profile.imageURL(withDimension: 150)?.absoluteString ?? ""
+        print("Google Profile Avatar URL: \(googleProfilePicURL)")
+        self.googleProfileURL = googleProfilePicURL
+        nextHomeVC()
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // Call your backend server to delete user's info after they requested to delete their account
     }
 }

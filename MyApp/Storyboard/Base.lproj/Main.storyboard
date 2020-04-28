@@ -33,9 +33,26 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZFJ-ff-cIo" userLabel="CustomerView2">
                                 <rect key="frame" x="0.0" y="23" width="414" height="56"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVL-G5-lSC">
+                                        <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="dVL-G5-lSC" secondAttribute="height" multiplier="1:1" id="8ZJ-Gf-3bK"/>
+                                            <constraint firstAttribute="width" constant="56" id="PjA-6a-s7m"/>
+                                        </constraints>
+                                        <state key="normal" image="line.horizontal.3" catalog="system"/>
+                                        <connections>
+                                            <action selector="actionLeftMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YpC-DA-D80"/>
+                                            <action selector="actionShowLeftMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WEj-Qb-GSD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.1960784314" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="dVL-G5-lSC" secondAttribute="bottom" id="Fxe-Fw-YEA"/>
                                     <constraint firstAttribute="height" constant="56" id="IHR-FP-69i"/>
+                                    <constraint firstItem="dVL-G5-lSC" firstAttribute="top" secondItem="ZFJ-ff-cIo" secondAttribute="top" id="Mex-6c-J8l"/>
+                                    <constraint firstItem="dVL-G5-lSC" firstAttribute="leading" secondItem="ZFJ-ff-cIo" secondAttribute="leading" id="dgj-oU-tjr"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xcY-q8-PZa" userLabel="CustomerView1">
@@ -45,27 +62,13 @@
                                     <constraint firstAttribute="height" constant="23" id="M9P-2G-bx7"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVL-G5-lSC">
-                                <rect key="frame" x="0.0" y="79" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="g1b-Aq-EwY"/>
-                                    <constraint firstAttribute="width" secondItem="dVL-G5-lSC" secondAttribute="height" multiplier="1:1" id="yD9-nb-WVD"/>
-                                </constraints>
-                                <state key="normal" image="line.horizontal.3" catalog="system"/>
-                                <connections>
-                                    <action selector="actionLeftMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YpC-DA-D80"/>
-                                    <action selector="actionShowLeftMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WEj-Qb-GSD"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="dVL-G5-lSC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3tW-98-mZk"/>
                             <constraint firstItem="kfZ-fW-Qsb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="DaO-O9-Svs"/>
                             <constraint firstItem="ZFJ-ff-cIo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FTy-ih-D3n"/>
                             <constraint firstItem="xcY-q8-PZa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JHm-WT-c5x"/>
                             <constraint firstItem="2T5-OU-NuB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="334" id="NgW-5D-4hE"/>
-                            <constraint firstItem="dVL-G5-lSC" firstAttribute="top" secondItem="ZFJ-ff-cIo" secondAttribute="bottom" id="QgC-OD-yR2"/>
                             <constraint firstItem="xcY-q8-PZa" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="RU4-Rx-nCE"/>
                             <constraint firstAttribute="trailing" secondItem="xcY-q8-PZa" secondAttribute="trailing" id="T6p-6W-Tmt"/>
                             <constraint firstItem="2T5-OU-NuB" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="bgI-Bp-MKs"/>
