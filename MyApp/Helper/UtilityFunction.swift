@@ -39,7 +39,7 @@ class UtilityFunction: NSObject {
            }
            let managedContext =
              appDelegate.persistentContainer.viewContext
-          let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UsersEntity")
+          let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UsersModel")
            let predicate = NSPredicate(format: "userName == %@", userName)
            request.predicate = predicate
            request.fetchLimit = 1
@@ -68,7 +68,7 @@ class UtilityFunction: NSObject {
         }
         let managedContext =
           appDelegate.persistentContainer.viewContext
-       let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UsersEntity")
+       let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UsersModel")
         let predicate = NSPredicate(format: "userName == %@ && password == %@ ", userName,password)
         request.predicate = predicate
         request.fetchLimit = 1

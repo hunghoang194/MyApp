@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LeftViewController: CustomSlideViewController {
+class LeftViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

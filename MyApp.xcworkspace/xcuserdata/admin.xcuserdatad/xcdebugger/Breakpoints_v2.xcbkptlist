@@ -23,16 +23,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "710980F1-E42B-41B2-B06B-38132676E1E6"
+            uuid = "38BBCB56-DA49-400C-ABFC-EA4A3AE7D21B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyApp/Controller/ViewController.swift"
+            filePath = "MyApp/Helper/CustomerLeftMenu/CustomSlideViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "nextScreen(_:)"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "panInSelf(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

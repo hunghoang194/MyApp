@@ -12,49 +12,61 @@ class ViewController: BaseViewController {
     
     @IBOutlet weak var btnLogOut: UIButton!
     @IBOutlet weak var btnShowLeftMenu: UIButton!
-    var leftVC: LeftViewController?
-    
+    let transiton = SlideInTransition()
     override func viewDidLoad() {
         super.viewDidLoad()
-        initProfileViewController()
-        addGesture()
-
+        for direction in [UISwipeGestureRecognizer.Direction.down, .up, .left, .right]{
+            let swipeGest = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(_:)))
+            swipeGest.direction = direction
+            self.view.addGestureRecognizer(swipeGest)
+        }
     }
     @IBAction func nextScreen(_ sender: Any) {
-//        openFirtVC()
-        showLeftViewController() 
+        //        openFirtVC()
+        
     }
     @IBAction func actionLogOut(_ sender: Any) {
-//        logOutDefault()
+        //        logOutDefault()
         logOutFB()
         nextHomeVCWhenLogOut()
     }
     @IBAction func actionShowLeftMenu(_ sender: Any) {
-        showLeftViewController()
+        showLeftMenu()
+        
     }
-    
-    fileprivate func initProfileViewController() {
-        let leftVC = LeftViewController(nibName: "LeftViewController", bundle: nil)
-        if let frame = UIApplication.shared.windows.last?.frame {
-            leftVC.resetWidth(parentWidth: frame.width)
-            leftVC.shadowColor = UIColor(red: 46.0/255, green: 24.0/255, blue: 82.0/255, alpha: 0.7)
-            leftVC.hasShadow = true
-            UIApplication.shared.windows.last?.addSubview(leftVC.view)
+    fileprivate func showLeftMenu() {
+        guard let menuViewController = storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController else { return }
+        menuViewController.didTapMenuType = { menuType in
+            self.transitionToNew(menuType)
         }
-        self.leftVC = leftVC
+        menuViewController.modalPresentationStyle = .overCurrentContext
+        menuViewController.transitioningDelegate = self
+        present(menuViewController, animated: true)
+    }
+    func transitionToNew(_ menuType: MenuType) {
+        switch menuType {
+        case .profile:
+            openFirtVC()
+        case .camera:
+            openSecondVC()
+        default:
+            break
+        }
+    }
+    @objc func swipeAction(_ gesture: UISwipeGestureRecognizer){
+        
+        
     }
     
-    fileprivate func addGesture() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.tapInSelf))
-        self.view.addGestureRecognizer(gesture)
+}
+extension ViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transiton.isPresenting = true
+        return transiton
     }
     
-    fileprivate func showLeftViewController() {
-        leftVC?.expand()
-    }
-    
-    @objc func tapInSelf() {
-        leftVC?.close()
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transiton.isPresenting = false
+        return transiton
     }
 }
-

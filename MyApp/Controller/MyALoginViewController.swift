@@ -128,7 +128,7 @@ class MyALoginViewController: BaseViewController {
             return
         }
         //check thanh cong het thi vao day
-        if let check = 
+
         self.nextHomeVC()
         self.showError(string: "Login sucesss for account \(userName)")
         }

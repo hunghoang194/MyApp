@@ -52,8 +52,8 @@ class BaseViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     //MARK: ShowAlert
-    @objc public func showError(string :String = "Plese enter email or password"){
-        let alert = UIAlertController(title: "Warning", message: string, preferredStyle: UIAlertController.Style.alert)
+    @objc public func showError(string :String = "Bạn vui lòng điền email hoặc mật khẩu"){
+        let alert = UIAlertController(title: "Thông báo", message: string, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }

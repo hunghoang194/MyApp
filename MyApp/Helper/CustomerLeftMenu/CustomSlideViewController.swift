@@ -1,9 +1,9 @@
 //
 //  CustomSlideViewController.swift
-//  MyApp
+//  CustomSlide
 //
-//  Created by Admin on 4/27/20.
-//  Copyright © 2020 Admin. All rights reserved.
+//  Created by Tuan LE on 8/14/17.
+//  Copyright © 2017 Leo LE. All rights reserved.
 //
 
 import UIKit

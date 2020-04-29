@@ -54,12 +54,12 @@ class MyARegisterViewController: BaseViewController {
             }
         }
         if (email.isEmpty || userName.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
-            showError(string: "Bạn vui lòng nhập thông tin email, sdt hoặc password vào để đăng ký tài khoản")
+            showError(string: "Bạn vui lòng nhập thông tin email, sdt hoặc mật khẩu vào để đăng ký tài khoản")
             return
         }
         
         if confirmPassword != password {
-            showError(string: "Password không giống nhau vui lòng kiểm tra lại")
+            showError(string: "Mật khảu không giống nhau vui lòng kiểm tra lại")
             return
         }
         
@@ -69,7 +69,7 @@ class MyARegisterViewController: BaseViewController {
         }
         
         if (!self.isValidPassword(testPass: password) || !self.isValidPassword(testPass: confirmPassword) ){
-            showError(string: "do dai pass k du")
+            showError(string: "độ dài pass không đủ")
             return
         }
         if let check = UtilityFunction.entityExists(userName: userName) , check == true{
@@ -78,7 +78,7 @@ class MyARegisterViewController: BaseViewController {
             nextLoginVC()
             showError(string: "đăng ký thành công")
         }else{
-            showError(string: "đã co loi")
+            showError(string: "Tài khoản đã tồn tại")
         }
         
     }
@@ -92,7 +92,7 @@ class MyARegisterViewController: BaseViewController {
       let managedContext =
         appDelegate.persistentContainer.viewContext
       let entity =
-        NSEntityDescription.entity(forEntityName: "UsersEntity",
+        NSEntityDescription.entity(forEntityName: "UsersModel",
                                    in: managedContext)!
       let users = NSManagedObject(entity: entity,
                                    insertInto: managedContext)
@@ -110,11 +110,10 @@ class MyARegisterViewController: BaseViewController {
             UIApplication.shared.delegate as? AppDelegate else {
               return
           }
-          
           let managedContext =
             appDelegate.persistentContainer.viewContext
           let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "UsersEntity")
+            NSFetchRequest<NSManagedObject>(entityName: "UsersModel")
           do {
             account = try managedContext.fetch(fetchRequest)
             print(account)
